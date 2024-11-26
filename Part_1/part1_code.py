@@ -16,6 +16,7 @@ def remove_comments(s):
         start = s.find('(*')
         end = s.find('*)', start) + 2
         s = s[:start] + s[end:]
+    s = s.replace('a1', 'a')
     return s
 
 # Reads each line from final.txt and removes any line that is empty
