@@ -1,0 +1,29 @@
+A = <prog> -> PROGRAM B ; var C begin F end
+
+B = <identifier> -> QR               SPECIAL CASE
+R -> Q | P
+
+C = <dec-list> -> D: E;
+D = <dec> -> B,D | B
+E = <type> -> integer
+F = <stat-list> - > G | GF
+G = <stat> -> H | J
+H = <write> -> print (IB);
+I = <str> -> "value=", | "Lambda"
+J = <assign> -> B = K;
+K = <expr> -> K + L | K - L | L
+L = <term> -> L * M | L / M | M
+M = <factor> -> B | N | (K)
+N = <number> -> OPS                           SPECIAL CASE
+S -> P
+
+O = <sign> -> + | - | "Lambda"
+P = <digit> -> {0 1 2 3 4 5 6 7 8 9}
+Q = <letter> -> {a b c d 1 f}
+
+NON-TERMINALS = {A-Q}
+RESERVED WORDS = program, var, begin, end, integer, and print
+TERMINALS = { PRINT ; "value=", = + - * 0 1 2 3 4 5 6 7 8 9 a b c d 1 f ( )}
+
+
+
