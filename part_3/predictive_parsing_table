@@ -1,0 +1,34 @@
+# IDK WHAT IM DOING
+A-> program B; var C begin F end
+B-> QR               SPECIAL CASE
+R-> Q | P
+C-> D: E;
+D-> B,D | B
+E-> integer
+F-> G | GF
+G-> H | J
+H-> print (IB);
+I-> "value=", | "Lambda"
+J-> B = K;
+--------K-> K + L | K - L | L--------
+REMOVE RECURSIVE
+K-> KT
+T-> +LT
+T-> -LT
+T-> "Lambda"
+--------L-> L * M | L / M | M--------
+REMOVE L RECURSIVE
+L-> LU
+U-> *MU
+U-> /MU
+U-> "LAMBDA"
+M-> B | N | (K)
+N-> OPS                           SPECIAL CASE
+S-> P
+O-> + | - | "Lambda"
+P-> {0 1 2 3 4 5 6 7 8 9}
+Q-> {a b c d 1 f}
+
+NON-TERMINALS = {A-Q}
+RESERVED WORDS = program, var, begin, end, integer, and print
+TERMINALS = { PRINT ; "value=", = + - * 0 1 2 3 4 5 6 7 8 9 a b c d 1 f ( )}
