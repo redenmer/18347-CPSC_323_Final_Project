@@ -31,7 +31,7 @@ U-> "LAMBDA"
 M-> B
 M-> N
 M-> (K)
-N-> OPS                           SPECIAL CASE
+N-> SPS                           SPECIAL CASE
 S-> +
 S-> -
 S-> "Lambda"
