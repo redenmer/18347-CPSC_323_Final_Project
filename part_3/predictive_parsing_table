@@ -4,7 +4,7 @@ B-> QR               SPECIAL CASE
 R-> Q
 R-> P
 C-> D: E;
-D-> B , D | B     <-------remove left recursive?
+D-> B , D | B     <--- ----remove left recursive?
 E-> integer
 F-> G
 F-> GF

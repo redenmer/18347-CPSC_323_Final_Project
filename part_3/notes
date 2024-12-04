@@ -5,7 +5,7 @@ B = <identifier> -> QR               SPECIAL CASE
 R -> Q | P
 
 C = <dec-list> -> D: E;
-D = <dec> -> B,D | B                Remove Left Recursive?
+D = <dec> -> B,D | B                Remove Left Recursive ?
 E = <type> -> integer
 F = <stat-list> - > G | GF
 G = <stat> -> H | J
