@@ -18,20 +18,20 @@ I-> "lambda" (blank)
 J-> B = K;
 --------K-> K + L | K - L | L--------
 REMOVE RECURSIVE
-K-> KT
+K-> LT
 T-> +LT
 T-> -LT
 T-> "Lambda"
 --------L-> L * M | L / M | M--------
 REMOVE L RECURSIVE
-L-> LU
+L-> MU
 U-> *MU
 U-> /MU
 U-> "LAMBDA"
 M-> B
 M-> N
 M-> (K)
-N-> OPS                           SPECIAL CASE
+N-> SPS                           SPECIAL CASE
 S-> +
 S-> -
 S-> "Lambda"
