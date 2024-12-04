@@ -1,14 +1,18 @@
 # IDK WHAT IM DOING
 A-> program B; var C begin F end
 B-> QR               SPECIAL CASE
-R-> Q | P
+R-> Q
+R-> P
 C-> D: E;
-D-> B,D | B
+D-> B , D | B     <-------remove left recursive?
 E-> integer
-F-> G | GF
-G-> H | J
+F-> G
+F-> GF
+G-> H
+G-> J
 H-> print (IB);
-I-> "value=", | "Lambda"
+I-> "value=",
+I-> "lambda" (blank)
 J-> B = K;
 --------K-> K + L | K - L | L--------
 REMOVE RECURSIVE
@@ -22,10 +26,13 @@ L-> LU
 U-> *MU
 U-> /MU
 U-> "LAMBDA"
-M-> B | N | (K)
+M-> B
+M-> N
+M-> (K)
 N-> OPS                           SPECIAL CASE
-S-> P
-O-> + | - | "Lambda"
+S-> +
+S-> -
+S-> "Lambda"
 P-> {0 1 2 3 4 5 6 7 8 9}
 Q-> {a b c d 1 f}
 

@@ -5,7 +5,7 @@ B = <identifier> -> QR               SPECIAL CASE
 R -> Q | P
 
 C = <dec-list> -> D: E;
-D = <dec> -> B,D | B
+D = <dec> -> B,D | B                Remove Left Recursive?
 E = <type> -> integer
 F = <stat-list> - > G | GF
 G = <stat> -> H | J
@@ -16,9 +16,7 @@ K = <expr> -> K + L | K - L | L
 L = <term> -> L * M | L / M | M
 M = <factor> -> B | N | (K)
 N = <number> -> OPS                           SPECIAL CASE
-S -> P
-
-O = <sign> -> + | - | "Lambda"
+S = <sign> -> + | - | "Lambda"
 P = <digit> -> {0 1 2 3 4 5 6 7 8 9}
 Q = <letter> -> {a b c d 1 f}
 
