@@ -1,4 +1,10 @@
 # NO CLUE WHAT IM DOING
+# Each instance is represented by a letter
+    ex: <letter> is represented by Q
+        <number> is represented as N
+# Reserved words are to be treated the same way as terminals?
+
+
 A = <prog> -> PROGRAM B ; var C begin F end
 
 B = <identifier> -> QR               SPECIAL CASE
