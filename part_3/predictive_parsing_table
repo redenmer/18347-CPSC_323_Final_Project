@@ -1,42 +1,44 @@
 # Rough draft of all the Entities being replaced by a letter
 
 # IDK WHAT IM DOING
-A-> program B; var C begin F end
-B-> QR               SPECIAL CASE
-R-> Q
-R-> P
-C-> D: E;
-D-> B , D | B     <--- ----remove left recursive?
-E-> integer
-F-> G
-F-> GF
+P-> program I; var C begin G end
+I-> LR               SPECIAL CASE
+R-> LR
+R-> DR
+R-> "Lambda"
+C-> Z: Y;
+Z-> I,Z
+Z-> I        <--- ----remove left recursive?
+Y-> integer
 G-> H
-G-> J
-H-> print (IB);
-I-> "value=",
-I-> "lambda" (blank)
-J-> B = K;
---------K-> K + L | K - L | L--------
-REMOVE RECURSIVE
-K-> LT
-T-> +LT
-T-> -LT
-T-> "Lambda"
---------L-> L * M | L / M | M--------
-REMOVE L RECURSIVE
-L-> MU
-U-> *MU
-U-> /MU
-U-> "LAMBDA"
-M-> B
-M-> N
-M-> (K)
-N-> SPS                           SPECIAL CASE
+G-> HG
+H-> W
+H-> A
+W-> print (BI);
+B-> "value=",
+B-> "lambda" (blank)
+A-> I = E;
+--------E-> E + T | E - T | T--------
+E-> TQ
+Q-> +TQ
+Q-> -TQ
+Q-> "Lambda"
+--------T-> T * F | T / F | F--------
+T-> FV
+V-> *FV
+V-> /FV
+V-> "Lambda"
+F-> I
+F-> N
+F-> (E)
+N-> SDK                           SPECIAL CASE
+K-> DK
+K-> "Lambda"
 S-> +
 S-> -
 S-> "Lambda"
-P-> {0 1 2 3 4 5 6 7 8 9}
-Q-> {a b c d 1 f}
+D-> {0 1 2 3 4 5 6 7 8 9}
+L-> {a b c d 1 f}
 
 NON-TERMINALS = {A-Q}
 RESERVED WORDS = program, var, begin, end, integer, and print
