@@ -7,11 +7,13 @@ R-> LR
 R-> DR
 R-> "Lambda"
 C-> Z: Y;
-Z-> I,Z
-Z-> I        <--- ----remove left recursive?
+Z-> IX
+X-> ,Z        <--- ----remove left recursive?
+X-> "Lambda"
 Y-> integer
-G-> H
-G-> HG
+G-> HJ
+J-> G
+J-> "Lambda"
 H-> W
 H-> A
 W-> print (BI);
@@ -43,3 +45,6 @@ L-> {a b c d 1 f}
 NON-TERMINALS = {A-Q}
 RESERVED WORDS = program, var, begin, end, integer, and print
 TERMINALS = { PRINT ; "value=", = + - * 0 1 2 3 4 5 6 7 8 9 a b c d 1 f ( )}
+
+
+

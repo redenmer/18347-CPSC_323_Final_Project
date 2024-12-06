@@ -27,7 +27,7 @@ S = <sign> -> + | - | "Lambda"
 D = <digit> -> {0 1 2 3 4 5 6 7 8 9}
 L = <letter> -> {a b c d 1 f}
 
-NON-TERMINALS = {A-Q}
+NON-TERMINALS = {P I R C Z Y G H W B A E T F N K S D L}
 RESERVED WORDS = program, var, begin, end, integer, and print
 TERMINALS = { PRINT ; "value=", = + - * 0 1 2 3 4 5 6 7 8 9 a b c d 1 f ( )}
 
