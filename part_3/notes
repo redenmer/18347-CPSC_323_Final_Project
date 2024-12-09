@@ -7,10 +7,10 @@
 
 P = <prog> -> program I; var C begin G end
 
-I = <identifier> -> LR               SPECIAL CASE
+I = <identifier> -> LR
 R -> LR | DR | "Lambda"
 C = <dec-list> -> Z: Y;
-Z = <dec> -> I,Z | I                Remove Left Recursive ?
+Z = <dec> -> I,Z | I
 Y = <type> -> integer
 G = <stat-list> -> H | HG
 H = <stat> -> W | A
@@ -20,7 +20,7 @@ A = <assign> -> I = E;
 E = <expr> -> E + T | E - T | T
 T = <term> -> T * F | T / F | F
 F = <factor> -> I | N | (E)
-N = <number> -> SDK                          SPECIAL CASE
+N = <number> -> SDK
 K -> DK
 k -> "Lambda"
 S = <sign> -> + | - | "Lambda"

@@ -2,13 +2,13 @@
 
 # IDK WHAT IM DOING
 P-> program I; var C begin G end
-I-> LR               SPECIAL CASE
+I-> LR
 R-> LR
 R-> DR
 R-> "Lambda"
 C-> Z: Y;
 Z-> IX
-X-> ,Z        <--- ----remove left recursive?
+X-> ,Z
 X-> "Lambda"
 Y-> integer
 G-> HJ
@@ -20,12 +20,10 @@ W-> print (BI);
 B-> "value=",
 B-> "lambda" (blank)
 A-> I = E;
---------E-> E + T | E - T | T--------
 E-> TQ
 Q-> +TQ
 Q-> -TQ
 Q-> "Lambda"
---------T-> T * F | T / F | F--------
 T-> FV
 V-> *FV
 V-> /FV
@@ -33,7 +31,7 @@ V-> "Lambda"
 F-> I
 F-> N
 F-> (E)
-N-> SDK                           SPECIAL CASE
+N-> SDK
 K-> DK
 K-> "Lambda"
 S-> +
