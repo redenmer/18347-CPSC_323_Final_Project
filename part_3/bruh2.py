@@ -1,20 +1,29 @@
+# Group names: Ian Martinez, Kiara Guerra, Arturo Roman, Omar Montes
+# Final Project Part 3
+# Due date : 12/10/2024
+# Purpose: Have our program (compiler) check the grammar of the program and display “No Error”
+# if the given grammar liked the program or issue “some errors” otherwise
+#
+#
+# Starting with parsing table
 parsing_table_q2 = {
     "P": {"program": "program I ; var C begin G end"},
     "I": {"a": "LR", "b": "LR", "c": "LR", "d": "LR", "l": "LR", "f": "LR"},
     "R": {"a": "LR", "b": "LR", "c": "LR", "d": "LR", "l": "LR", "f": "LR", "0": "DR", "1": "DR", "2": "DR", "3": "DR",
-          "4": "DR", "5": "DR", "6": "DR", "7": "DR", "8": "DR", "9": "DR", ")": "λ", "+": "λ", "-": "λ",  "*": "λ",
-          "/": "λ",  "=": "λ", ",": "λ", ";": "λ", ":": "λ"},
+          "4": "DR", "5": "DR", "6": "DR", "7": "DR", "8": "DR", "9": "DR", ")": "λ", "+": "λ", "-": "λ", "*": "λ",
+          "/": "λ", "=": "λ", ",": "λ", ";": "λ", ":": "λ"},
     "C": {"a": "Z: Y;", "b": "Z: Y;", "c": "Z: Y;", "d": "Z: Y;", "l": "Z: Y;", "f": "Z: Y;"},
     "Z": {"a": "IX", "b": "IX", "c": "IX", "d": "IX", "l": "IX", "f": "IX"},
     "X": {",": ",Z", ":": "λ"},
     "Y": {"integer": "integer"},
     "G": {"print": "HJ", "a": "HJ", "b": "HJ", "c": "HJ", "d": "HJ", "l": "HJ", "f": "HJ"},
     "J": {"print": "G", "a": "G", "b": "G", "c": "G", "d": "G", "l": "G", "f": "G", "end": "λ"},
-    "H": {"print": "W", "a": "A", "b": "A",  "c": "A", "d": "A", "l": "A", "f": "A"},
+    "H": {"print": "W", "a": "A", "b": "A", "c": "A", "d": "A", "l": "A", "f": "A"},
     "W": {"print": "print(BI);"},
     "B": {"O": "O", "a": "λ", "b": "λ", "c": "λ", "d": "λ", "l": "λ", "f": "λ", '"value=",': '"value=",'},
     "A": {"a": "I = E;", "b": "I = E;", "c": "I = E;", "d": "I = E;", "l": "I = E;", "f": "I = E;"},
-    "E": {"a": "TQ", "b": "TQ", "c": "TQ", "d": "TQ", "l": "TQ", "f": "TQ", "0": "TQ", "1": "TQ", "2": "TQ", "3": "TQ", "4": "TQ", "5": "TQ",
+    "E": {"a": "TQ", "b": "TQ", "c": "TQ", "d": "TQ", "l": "TQ", "f": "TQ", "0": "TQ", "1": "TQ", "2": "TQ", "3": "TQ",
+          "4": "TQ", "5": "TQ",
           "6": "TQ", "7": "TQ", "8": "TQ", "9": "TQ", "(": "TQ", "+": "TQ", "-": "TQ"},
     "Q": {";": "λ", "+": "+TQ", "-": "-TQ", ")": "λ"},
     "T": {"a": "FV", "b": "FV", "c": "FV", "d": "FV", "l": "FV", "f": "FV", "0": "FV", "1": "FV", "2": "FV", "3": "FV",
@@ -26,14 +35,18 @@ parsing_table_q2 = {
           "9": "SDK", "+": "SDK", "-": "SDK"},
     "K": {"0": "DK", "1": "DK", "2": "DK", "3": "DK", "4": "DK", "5": "DK", "6": "DK", "7": "DK", "8": "DK", "9": "DK",
           "+": "λ", "-": "λ", "*": "λ", "/": "λ", ")": "λ", ";": "λ"},
-    "S": {"0": "λ", "1": "λ", "2": "λ", "3": "λ", "4": "λ", "5": "λ", "6": "λ", "7": "λ", "8": "λ", "9": "λ", "+": "+", "-": "-"},
+    "S": {"0": "λ", "1": "λ", "2": "λ", "3": "λ", "4": "λ", "5": "λ", "6": "λ", "7": "λ", "8": "λ", "9": "λ", "+": "+",
+          "-": "-"},
     "D": {"0": "0", "1": "1", "2": "2", "3": "3", "4": "4", "5": "5", "6": "6", "7": "7", "8": "8", "9": "9"},
     "L": {"a": "a", "b": "b", "c": "c", "d": "d", "l": "e", "f": "f"}
 }
 
+# Reserved words for the grammar
 reserved = {"program", "end", "var", "begin", "integer", "print", "LB"}
 LB = '"value=",'
 
+# Function to get the next chunk of input from the given string it skips over white space and checks if there are any
+# matches for reserved words till the next whitepace if not then the string is taken char by char
 def get_next_chunk(input_string, index):
     while index < len(input_string) and input_string[index].isspace():
         index += 1
@@ -51,6 +64,7 @@ def get_next_chunk(input_string, index):
 
     return input_string[index], index + 1
 
+# Function to split a production rule into individual chunks so lift of takens using other function
 def chunk_production(production):
     chunks = []
     index = 0
@@ -59,6 +73,7 @@ def chunk_production(production):
         chunks.append(chunk)
     return chunks
 
+# Function to accept or reject lines based on the grammar rules
 def accept_or_reject_lines(input_lines):
     stack = ["$", "P"]
     step = 1
@@ -71,7 +86,6 @@ def accept_or_reject_lines(input_lines):
         while stack:
             top = stack[-1]
             current_input, next_index = get_next_chunk(line, index)
-
 
             if current_input == "$" and top == "$":
                 break
@@ -125,7 +139,7 @@ def accept_or_reject_lines(input_lines):
                             return False
                     elif top == "R" or top == ";" or top == "K":
                         if current_input == "print" or current_input == "end" or current_input == "var" or current_input == "begin" or current_input == "b" or current_input == "c":
-                            print(f"\nERROR on line {line_number-1}, ';' is missing")
+                            print(f"\nERROR on line {line_number - 1}, ';' is missing")
                             return False
                         else:
                             continue
@@ -142,7 +156,8 @@ def accept_or_reject_lines(input_lines):
                         else:
                             continue
                     else:
-                        print(f"{step}\t{' '.join(stack)}\t\t\tPop: {top} | Reject: no matching grammar for '{current_input}'")
+                        print(
+                            f"{step}\t{' '.join(stack)}\t\t\tPop: {top} | Reject: no matching grammar for '{current_input}'")
                         return False
 
                 stack.pop()
@@ -164,8 +179,7 @@ def accept_or_reject_lines(input_lines):
 
     return True
 
-
-
+# Main that takes care of opening the file and having the last say of accept or reject
 def main():
     input_filename = "final24.txt"
     try:
@@ -179,6 +193,6 @@ def main():
     except FileNotFoundError:
         print(f"Error: The file '{input_filename}' was not found.")
 
+
 if __name__ == "__main__":
     main()
-    
