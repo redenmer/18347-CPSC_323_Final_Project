@@ -113,11 +113,11 @@ def main():
     input_filename = "final24.txt"
     try:
         with open(input_filename, encoding="utf-8") as file:
-            all = file.read().replace("\n", "").strip()
-            all += "$"
+            all = file.read().strip()
+            fall = all +  "$"
 
-            if all:
-                result = accept_or_reject(all)
+            if fall:
+                result = accept_or_reject(fall)
                 print(f"\nResult for \"{all}\": {'Accepted' if result else 'Rejected'}")
     except FileNotFoundError:
         print(f"Error: The file '{input_filename}' was not found.")

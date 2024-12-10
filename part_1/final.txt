@@ -12,7 +12,7 @@
 
                  (* compute the value of the expression *)
                  bba =  ( b2a + 2 * c) * a1          ;
-                 print ( “value=”,          bba   ) ;  (* print the value of bba*)
+                 print ( "value=",          bba   ) ;  (* print the value of bba*)
 
            end
 

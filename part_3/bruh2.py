@@ -34,7 +34,6 @@ parsing_table_q2 = {
 reserved = {"program", "end", "var", "begin", "integer", "print", "LB"}
 LB = '"value=",'
 
-
 def get_next_chunk(input_string, index):
     while index < len(input_string) and input_string[index].isspace():
         index += 1
@@ -64,15 +63,15 @@ def accept_or_reject_lines(input_lines):
     stack = ["$", "P"]
     step = 1
 
-    for line in input_lines:
+    for line_number, line in enumerate(input_lines, start=1):
         index = 0
         line += "#"
-        print("\nLine Tracing:", line)
-        print("Step\tStack\tPath")
+        print(f"\nLine Tracing: {line}")
 
         while stack:
-            top = stack[-1]  
+            top = stack[-1]
             current_input, next_index = get_next_chunk(line, index)
+
 
             if current_input == "$" and top == "$":
                 stack.pop()
@@ -83,13 +82,72 @@ def accept_or_reject_lines(input_lines):
                 stack.pop()
                 print(f"{step}\t{' '.join(stack)}\t\t\tPop: {top} | Match with input '{current_input}'")
                 index = next_index
-
             else:
                 grammar = parsing_table_q2.get(top, {}).get(current_input)
                 if grammar is None:
                     if current_input == "#":
                         print(f"{step}\t{' '.join(stack)}\t\t\tAccepted at end of line")
                         break
+                    elif top == "var":
+                        if current_input == "var":
+                            continue
+                        else:
+                            print(f"ERROR on line {line_number}, 'var' misspelled")
+                            return False
+                    elif top == "Y":
+                        if current_input == "integer":
+                            continue
+                        else:
+                            print(f"ERROR on line {line_number}, 'integer' misspelled")
+                            return False
+                    elif top == "P":
+                        if current_input == "program":
+                            continue
+                        else:
+                            print(f"ERROR on line {line_number}, 'program' misspelled")
+                            return False
+                    elif top == "begin":
+                        if current_input == "begin":
+                            continue
+                        else:
+                            print(f"ERROR on line {line_number}, 'begin' misspelled")
+                            return False
+                    elif top == "J":
+                        if current_input == "end":
+                            continue
+                        else:
+                            print(f"ERROR on line {line_number}, 'end' misspelled")
+                            return False
+                    elif top == "J":
+                        if current_input == "print":
+                            continue
+                        else:
+                            print(f"ERROR on line {line_number}, 'print' misspelled")
+                            return False
+                    elif top == "R" or top == ";" or top == "K":
+                        if current_input == "print" or current_input == "end" or current_input == "var" or current_input == "begin" or current_input == "b" or current_input == "c":
+                            print(f"ERROR on line {line_number}, ';' is missing")
+                            return False
+                        else:
+                            continue
+                    elif top == ")":
+                        if current_input == ")":
+                            continue
+                        else:
+                            print(f"ERROR on line {line_number}, ')' is missing")
+                            return False
+                    elif top == "(":
+                        if current_input == "c" or current_input == '"value=",':
+                            print(f"ERROR on line {line_number}, '(' is missing")
+                            return False
+                        else:
+                            continue
+                    elif top == "E":
+                        if current_input == "b":
+                            if line == 9:
+                                print(f"ERROR on line {line_number}, '(' is missing")
+                                return False
+
                     else:
                         print(f"{step}\t{' '.join(stack)}\t\t\tPop: {top} | Reject: no matching grammar for '{current_input}'")
                         return False
@@ -104,6 +162,7 @@ def accept_or_reject_lines(input_lines):
                     print(f"{step}\t{' '.join(stack)}\t\t\t{path}")
                 elif top == "B" and current_input == "O":
                     stack.append(LB)
+
                 elif grammar == "λ":
                     print(f"{step}\t{' '.join(stack)}\t\t\tPop: {top} | Go to [{top}, {current_input}] -> {grammar}")
                 else:
