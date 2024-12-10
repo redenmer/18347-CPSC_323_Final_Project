@@ -74,7 +74,6 @@ def accept_or_reject_lines(input_lines):
 
 
             if current_input == "$" and top == "$":
-                stack.pop()
                 print(f"{step}\t{' '.join(stack)}\t\t\tPop: {top} | Accepted")
                 break
 
@@ -115,14 +114,16 @@ def accept_or_reject_lines(input_lines):
                     elif top == "J":
                         if current_input == "end":
                             continue
-                        else:
+                        elif current_input == "print":
+                            continue
+                        elif current_input == "p":
+                            print(f"ERROR on line {line_number}, 'print' misspelled")
+                            return False
+                        elif current_input == "e" or current_input == "n" or current_input == "d":
                             print(f"ERROR on line {line_number}, 'end' misspelled")
                             return False
-                    elif top == "J":
-                        if current_input == "print":
-                            continue
                         else:
-                            print(f"ERROR on line {line_number}, 'print' misspelled")
+                            print(f"ERROR on line {line_number}, unknown identifier {current_input}")
                             return False
                     elif top == "R" or top == ";" or top == "K":
                         if current_input == "print" or current_input == "end" or current_input == "var" or current_input == "begin" or current_input == "b" or current_input == "c":
@@ -142,12 +143,6 @@ def accept_or_reject_lines(input_lines):
                             return False
                         else:
                             continue
-                    elif top == "E":
-                        if current_input == "b":
-                            if line == 9:
-                                print(f"ERROR on line {line_number}, '(' is missing")
-                                return False
-
                     else:
                         print(f"{step}\t{' '.join(stack)}\t\t\tPop: {top} | Reject: no matching grammar for '{current_input}'")
                         return False
