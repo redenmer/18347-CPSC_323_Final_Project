@@ -89,25 +89,25 @@ def accept_or_reject_lines(input_lines):
                         if current_input == "var":
                             continue
                         else:
-                            print(f"ERROR on line {line_number}, 'var' misspelled")
+                            print(f"\nERROR on line {line_number}, 'var' misspelled")
                             return False
                     elif top == "Y":
                         if current_input == "integer":
                             continue
                         else:
-                            print(f"ERROR on line {line_number}, 'integer' misspelled")
+                            print(f"\nERROR on line {line_number}, 'integer' misspelled")
                             return False
                     elif top == "P":
                         if current_input == "program":
                             continue
                         else:
-                            print(f"ERROR on line {line_number}, 'program' misspelled")
+                            print(f"\nERROR on line {line_number}, 'program' misspelled")
                             return False
                     elif top == "begin":
                         if current_input == "begin":
                             continue
                         else:
-                            print(f"ERROR on line {line_number}, 'begin' misspelled")
+                            print(f"\nERROR on line {line_number}, 'begin' misspelled")
                             return False
                     elif top == "J":
                         if current_input == "end":
@@ -115,17 +115,17 @@ def accept_or_reject_lines(input_lines):
                         elif current_input == "print":
                             continue
                         elif current_input == "p":
-                            print(f"ERROR on line {line_number}, 'print' misspelled")
+                            print(f"\nERROR on line {line_number}, 'print' misspelled")
                             return False
                         elif current_input == "e" or current_input == "n" or current_input == "d":
-                            print(f"ERROR on line {line_number}, 'end' misspelled")
+                            print(f"\nERROR on line {line_number}, 'end' misspelled")
                             return False
                         else:
-                            print(f"ERROR on line {line_number}, unknown identifier {current_input}")
+                            print(f"\nERROR on line {line_number}, unknown identifier {current_input}")
                             return False
                     elif top == "R" or top == ";" or top == "K":
                         if current_input == "print" or current_input == "end" or current_input == "var" or current_input == "begin" or current_input == "b" or current_input == "c":
-                            print(f"ERROR on line {line_number-1}, ';' is missing")
+                            print(f"\nERROR on line {line_number-1}, ';' is missing")
                             return False
                         else:
                             continue
@@ -133,11 +133,11 @@ def accept_or_reject_lines(input_lines):
                         if current_input == ")":
                             continue
                         else:
-                            print(f"ERROR on line {line_number}, ')' is missing")
+                            print(f"\nERROR on line {line_number}, ')' is missing")
                             return False
                     elif top == "(":
                         if current_input == "c" or current_input == '"value=",':
-                            print(f"ERROR on line {line_number}, '(' is missing")
+                            print(f"\nERROR on line {line_number}, '(' is missing")
                             return False
                         else:
                             continue
@@ -174,7 +174,8 @@ def main():
 
             if input_lines:
                 result = accept_or_reject_lines(input_lines)
-                print(f"\nOverall Result: {'Accepted' if result else 'Rejected'}")
+                if result:
+                    print("\nReady to Compile")
     except FileNotFoundError:
         print(f"Error: The file '{input_filename}' was not found.")
 
