@@ -74,18 +74,16 @@ def accept_or_reject_lines(input_lines):
 
 
             if current_input == "$" and top == "$":
-                print(f"{step}\t{' '.join(stack)}\t\t\tPop: {top} | Accepted")
                 break
 
             elif top == current_input:
                 stack.pop()
-                print(f"{step}\t{' '.join(stack)}\t\t\tPop: {top} | Match with input '{current_input}'")
                 index = next_index
             else:
                 grammar = parsing_table_q2.get(top, {}).get(current_input)
                 if grammar is None:
                     if current_input == "#":
-                        print(f"{step}\t{' '.join(stack)}\t\t\tAccepted at end of line")
+                        print(f"Accepted at end of line {line_number}")
                         break
                     elif top == "var":
                         if current_input == "var":
@@ -127,7 +125,7 @@ def accept_or_reject_lines(input_lines):
                             return False
                     elif top == "R" or top == ";" or top == "K":
                         if current_input == "print" or current_input == "end" or current_input == "var" or current_input == "begin" or current_input == "b" or current_input == "c":
-                            print(f"ERROR on line {line_number}, ';' is missing")
+                            print(f"ERROR on line {line_number-1}, ';' is missing")
                             return False
                         else:
                             continue
@@ -149,19 +147,15 @@ def accept_or_reject_lines(input_lines):
 
                 stack.pop()
                 if grammar != "λ":
-                    path = f"Pop: {top} | Go to [{top}, {current_input}] -> {grammar}"
                     chunks = chunk_production(grammar)
                     for chunk in reversed(chunks):
                         stack.append(chunk)
-                        path += f" | Push {chunk}"
-                    print(f"{step}\t{' '.join(stack)}\t\t\t{path}")
                 elif top == "B" and current_input == "O":
                     stack.append(LB)
 
                 elif grammar == "λ":
-                    print(f"{step}\t{' '.join(stack)}\t\t\tPop: {top} | Go to [{top}, {current_input}] -> {grammar}")
+                    continue
                 else:
-                    print(f"{step}\t{' '.join(stack)}\t\t\tPop: {top} | Reject: no matching grammar for '{current_input}'")
                     return False
 
             step += 1
@@ -169,6 +163,7 @@ def accept_or_reject_lines(input_lines):
         index = 0
 
     return True
+
 
 
 def main():
@@ -185,3 +180,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
